@@ -1,0 +1,64 @@
+@font-face {
+  font-family: Integral-Bold;
+  src: url("/localFonts/Integral-CF-Bold.otf");
+}
+
+.Navbar {
+  padding: 0px;
+
+  .logo {
+    font-family: Integral-Bold;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .nav_items ul li {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+
+  .updatePart {
+    font-size: 12px;
+    gap: 5px;
+
+  }
+}
+
+.nav_list.active {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 100%;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99;
+  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.5);
+  animation: nav 0.3s ease-in-out forwards;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & li {
+    font-size: 30px;
+    font-weight: 600;
+    color: #222;
+    text-transform: uppercase;
+  }
+}
+
+@keyframes nav {
+  from {
+    left: 100%;
+  }
+
+  to {
+    left: 0%;
+  }
+}

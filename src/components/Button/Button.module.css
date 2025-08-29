@@ -1,0 +1,48 @@
+.button {
+  width: 100%;
+  font-size: 16px;
+  border-radius: 62px;
+  padding: 16px 64px;
+  white-space: nowrap;
+  font-weight: 500 !important;
+  transition: 0.3s all cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.dark_variant {
+  background-color: black;
+  color: #f0f0f0;
+}
+
+.dark_variant:hover {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.light_variant {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.light_variant:hover {
+  background-color: black;
+  color: #f0f0f0;
+}
+
+@media screen and (max-width: 1024px) {
+  .button {
+    width: full;
+    font-size: 15px !important;
+    border-radius: 62px;
+    padding: 12px 38px;
+    white-space: nowrap;
+  }
+}
+
+/* @media screen and (max-width: 768px) {
+  .button {
+    width: full;
+    font-size: 12px !important;
+    border-radius: 62px;
+    padding: 8px 32px;
+  }
+} */

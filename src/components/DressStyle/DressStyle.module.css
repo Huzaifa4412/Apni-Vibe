@@ -1,0 +1,23 @@
+  .wrapper {
+    & div {
+      min-width: 250px;
+    }
+
+    & div:nth-child(1) {
+      background: url("/DressStyles/img1.png") no-repeat center center/cover;
+      background-position: top left;
+
+    }
+
+    & div:nth-child(2) {
+      background: url("/DressStyles/img2.png") no-repeat left center/cover;
+    }
+
+    & div:nth-child(3) {
+      background: url("/DressStyles/img3.png") no-repeat left center/cover;
+    }
+
+    & div:nth-child(4) {
+      background: url("/DressStyles/img4.png") no-repeat left top/cover;
+    }
+  }

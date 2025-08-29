@@ -1,0 +1,9 @@
+@font-face {
+  font-family: Integral-Bold;
+  src: url("/localFonts/Integral-CF-Bold.otf");
+}
+.heading {
+  font-family: Integral-Bold;
+  font-size: 32px;
+  font-weight: bold;
+}

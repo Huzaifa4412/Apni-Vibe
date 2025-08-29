@@ -1,0 +1,88 @@
+[
+  {
+    "id": "prod-tshirt-tape-001",
+    "image": "/products/img1.png",
+    "otherImages": [
+      "/products/img1.png",
+      "/products/product_page/product1/NA4I39176-HERO.webp",
+      "/products/product_page/product1/img2.jpeg",
+      "/products/product_page/product1/img3.jpg",
+      "/products/product_page/product1/img4.jpg"
+    ],
+    "title": "T-SHIRT WITH TAPE DETAILS",
+    "rating": "4.5/5",
+    "discount": false,
+    "price": "$120",
+    "actualPrice": "$180",
+    "discountTag": "-20%",
+    "category": "T-Shirts",
+    "description": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+    "colors": ["#4F4631", "#314F4A", "#31344F"],
+    "sizes": ["Small", "Medium", "Large", "X-Large"],
+    "qty": 0
+  },
+  {
+    "id": "prod-jeans-skinny-002",
+    "image": "/products/img2.png",
+    "title": "SKINNY FIT JEANS",
+    "otherImages": [
+      "/products/img2.png",
+      "https://media.istockphoto.com/id/1927474791/photo/male-body-part.jpg?s=2048x2048&w=is&k=20&c=AGUqjlxA_NZrqC2TRUKTZyeUwWeRRXnRKlJwt0wCaD8=",
+      "https://images.unsplash.com/photo-1604176354204-9268737828e4?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://media.istockphoto.com/id/1408957845/photo/denim-jeans-isolated-on-the-white-background.jpg?s=2048x2048&w=is&k=20&c=NWbIOtJ8zYYuNRcF4e_MTYfITFgvlEOWmGe2gqfj8Lk="
+    ],
+    "rating": "4.5/5",
+    "discount": true,
+    "price": "$120",
+    "actualPrice": "$260",
+    "discountTag": "-20%",
+    "category": "Jeans",
+    "description": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+    "colors": ["#4F4631", "#314F4A", "#31344F"],
+    "sizes": ["Small", "Medium", "Large", "X-Large"],
+    "qty": 0
+  },
+  {
+    "id": "prod-shirt-checkered-003",
+    "image": "/products/img3.png",
+    "title": "CHECKERED SHIRT",
+    "rating": "4.5/5",
+    "discount": false,
+    "price": "$120",
+    "actualPrice": "$140",
+    "discountTag": "-20%",
+    "category": "SHIRT",
+    "otherImages": [
+      "/products/img3.png",
+      "https://media.istockphoto.com/id/498852901/photo/red-plaid-shirt.jpg?s=2048x2048&w=is&k=20&c=AncE8-m74yXlT_aFIzOSGjPnN_HFToobjc0VVlovOr8=",
+      "https://media.istockphoto.com/id/184962348/photo/blue-flannel-shirt.jpg?s=2048x2048&w=is&k=20&c=Gdn7DakQ58YBeh9Nin0InzCBYw7udM5kRYfDMfvLzvM=",
+      "https://media.istockphoto.com/id/175425319/photo/relaxed-and-friendly-copyspace.jpg?s=2048x2048&w=is&k=20&c=4iiFvZCFlU_u9EMH5tXzbKS4HoZ--Yz8y3u9SE6z_XI="
+    ],
+    "description": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+    "colors": ["#4F4631", "#314F4A", "#31344F"],
+    "sizes": ["Small", "Medium", "Large", "X-Large"],
+    "qty": 0
+  },
+  {
+    "id": "prod-tshirt-striped-004",
+    "image": "/products/img4.png",
+    "title": "SLEEVE STRIPED T-SHIRT",
+    "otherImages": [
+      "/products/img4.png",
+      "https://media.istockphoto.com/id/1430110657/photo/striped-sweatshirt-isolated.jpg?s=2048x2048&w=is&k=20&c=v3obkmc91qcgDJVG2p8cbRBkxp6yJjkrYjolZY1-qFE=",
+      "https://cdn.pixabay.com/photo/2024/02/06/18/10/ai-generated-8557635_1280.jpg",
+      "https://cdn.pixabay.com/photo/2024/04/29/04/21/neon-8726714_960_720.jpg"
+    ],
+    "rating": "4.5/5",
+    "discount": true,
+    "price": "$120",
+    "actualPrice": "$160",
+    "discountTag": "-20%",
+    "category": "T-SHIRT",
+    "description": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+    "colors": ["#4F4631", "#314F4A", "#31344F"],
+    "sizes": ["Small", "Medium", "Large", "X-Large"],
+
+    "qty": 0
+  }
+]

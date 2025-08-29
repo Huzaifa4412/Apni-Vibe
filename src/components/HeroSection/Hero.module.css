@@ -1,0 +1,104 @@
+@font-face {
+  font-family: Integral-Bold;
+  src: url("/localFonts/Integral-CF-Bold.otf");
+}
+
+@font-face {
+  font-family: Satoshi-Regular;
+  src: url("/localFonts/Satoshi-Regular.woff");
+}
+
+.HeroSection {
+  background: var(--light-gray);
+  height: 663px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 120px;
+
+
+}
+
+.HeroSection h1 {
+  font-family: Integral-Bold;
+}
+
+@media screen and (max-width: 1400px) {
+  .HeroSection {
+    padding: 0px;
+
+  }
+
+  .leftPart {
+    padding-left: 64px;
+  }
+
+}
+
+
+@media screen and (max-width: 1024px) {
+  .HeroSection {
+    padding: 0px
+  }
+
+  .vector {
+    width: 80px;
+    aspect-ratio: 1;
+  }
+
+  .leftPart {
+    padding-left: 32px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .HeroSection {
+    flex-direction: column;
+    height: max-content;
+    padding-top: 20px;
+  }
+
+  .vector {
+    width: 60px;
+    aspect-ratio: 1;
+  }
+
+  .leftPart {
+    width: 100%;
+    padding: 20px 40px;
+    gap: 20px;
+  }
+
+  .rightPart {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .HeroSection {
+    flex-direction: column;
+    height: max-content;
+    padding-top: 20px;
+  }
+
+  .vector {
+    width: 60px;
+    aspect-ratio: 1;
+  }
+
+  .leftPart {
+    width: 100%;
+    padding: 20px 10px;
+    gap: 20px;
+
+    & h1 {
+      font-size: 36px;
+      line-height: 40px;
+    }
+
+  }
+
+  .rightPart {
+    width: 100%;
+  }
+}
