@@ -7,16 +7,16 @@ import TopSelling from "@/components/TopSelling/TopSelling";
 import React from "react";
 
 const page = () => {
-  return (
-    <div>
-      <Hero />
-      <Brands />
-      <NewArrivals />
-      <TopSelling />
-      <DressStyle />
-      <Testimonials />
-    </div>
-  );
+    return (
+        <div>
+            <Hero />
+            <Brands />
+            <NewArrivals />
+            <TopSelling />
+            <DressStyle />
+            <Testimonials />
+        </div>
+    );
 };
 
 export default page;

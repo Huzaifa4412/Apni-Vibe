@@ -9,51 +9,51 @@ import DataProvider from "./context/ProductContext";
 import CustomCursor from "@/components/CustomCursor/Cursor";
 
 export const metadata: Metadata = {
-  title: "Shop.co",
-  description:
-    "Created by Huzaifa Mukhtar Roll number 499351 github: Huzaifa4412",
-  keywords: ["e-commerce", "shop", "nextjs", "typescript"],
+    title: "Shop.co",
+    description:
+        "Created by Huzaifa Mukhtar Roll number 499351 github: Huzaifa4412",
+    keywords: ["e-commerce", "shop", "nextjs", "typescript"],
 };
 
 const urbanist = Urbanist({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    subsets: ["latin"],
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        suppressHydrationWarning
-        className={` ${urbanist.className} antialiased`}
-      >
-        <ToastContainer
-          position="top-center"
-          autoClose={1200}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-          transition={Flip}
-        />
-        <CustomCursor />
+    return (
+        <html lang="en" suppressHydrationWarning>
+            <body
+                suppressHydrationWarning
+                className={` ${urbanist.className} antialiased`}
+            >
+                <ToastContainer
+                    position="top-center"
+                    autoClose={1200}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="dark"
+                    transition={Flip}
+                />
+                <CustomCursor />
 
-        <DataProvider>
-          <CartProvider>
-            <Navbar />
-            {children}
-            <Footer />
-          </CartProvider>
-        </DataProvider>
-      </body>
-    </html>
-  );
+                <DataProvider>
+                    <CartProvider>
+                        <Navbar />
+                        {children}
+                        <Footer />
+                    </CartProvider>
+                </DataProvider>
+            </body>
+        </html>
+    );
 }
