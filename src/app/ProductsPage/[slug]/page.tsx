@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { Watch } from "react-loader-spinner";
 import Image from "next/image";
-import Heading from "@/components/Heading/Heading";
 import Button from "@/components/Button/Button";
 import { Cart, Product } from "../../../../Typing";
 import Link from "next/link";
@@ -15,6 +14,7 @@ import Rating from "@/components/Rating/Rating";
 import MightLike from "@/components/MightLike/MightLike";
 import CommentForm from "@/components/CommentSection/CommentForm";
 import CommentList from "@/components/CommentSection/Comments";
+import { space_grotesk } from "@/lib/fonts";
 
 // import MightLike from "@/components/MightLike/MightLike";
 
@@ -209,7 +209,10 @@ const Page = ({ params }: { params: { slug: string } }) => {
 
         <div className="details flex flex-col gap-4">
           <div>
-            <Heading text={name ?? ""} />
+            {/* <Heading text={name ?? ""} /> */}
+            <h2 className={`${space_grotesk.className}  text-center sm:text-left w-full uppercase px-2`}>
+              {name ?? ""}
+            </h2>
           </div>
 
           {rating && <Rating rating={rating} />}

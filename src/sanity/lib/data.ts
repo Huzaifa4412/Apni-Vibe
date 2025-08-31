@@ -26,6 +26,7 @@ export async function getAllProducts() {
     "category":category->title,
     isNew,
     sale,
+    top_selling,
     discountPercent,
     "discountedPrice": select(
       sale == true && defined(discountPercent) => price - ((price * discountPercent) / 100),

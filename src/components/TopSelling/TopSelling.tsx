@@ -21,7 +21,11 @@ import { ContextType, DataContext } from "@/app/context/ProductContext";
 // };
 
 export default function TopSelling() {
-  const { data } = useContext(DataContext) as ContextType;
+
+  let { data } = useContext(DataContext) as ContextType;
+  data = data.filter((data) => data.top_selling);
+
+  data.splice(4);
 
   return (
     <div
@@ -29,9 +33,10 @@ export default function TopSelling() {
     >
       <Heading text="Top Selling" />
       <div className="productsContainer flex flex-wrap flex-shrink-0 justify-center  gap-[8px]">
-        {data.slice(2, 6).map((item: Product) => {
-          return <ProductCard item={item} key={item._id} />;
-        })}
+        {data !== undefined &&
+          data.map((product: Product) => (
+            <ProductCard key={product._id} item={product} />
+          ))}
       </div>
       <div className="w-max">
         <Link href={"/ProductsPage"}>

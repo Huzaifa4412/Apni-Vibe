@@ -13,6 +13,7 @@ export interface Product {
     discountedPrice: number;
     rating?: number;
     quantity?: number;
+    top_selling?: boolean;
 }
 
 

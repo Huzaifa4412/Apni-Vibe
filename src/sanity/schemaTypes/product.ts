@@ -53,6 +53,11 @@ export default defineType({
             title: "On Sale",
         },
         {
+            name: "top_selling",
+            type: 'boolean',
+            title: "Top Selling",
+        },
+        {
             name: "discountPercent",
             title: "Discount Percent",
             type: 'number',
