@@ -46,11 +46,11 @@ function ProductCard({ item }: { item: Product }) {
         />
         <h3 className="font-bold text-[20px] capitalize">{name}</h3>
         <div className="rating flex gap-[8px]">
-          {<Rating rating={rating} />}
+          {<Rating rating={rating || 5} />}
         </div>
         <div className="price flex gap-[10px]">
           <h3 className="text-[24px] font-bold">${discountedPrice}</h3>
-          {discountPercent > 0 && (
+          {discountPercent && discountPercent > 0 && (
             <div className="discount">
               <div className="DiscountPrice flex gap-[10px]">
                 <h3 className="text-[24px] font-bold text-[#000000]/40">

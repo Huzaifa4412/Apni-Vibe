@@ -141,12 +141,7 @@ const CartItems = ({ item }: { item: Cart }) => {
                 {item.title}
               </div>
 
-              <div className="p_color font-light text-lg text-slate-400">
-                Color : {item.p_color !== undefined ? item.p_color : "N/A"}
-              </div>
-              <div className="p_size font-light text-lg text-slate-400">
-                Size : {item.p_size !== undefined ? item.p_size : "N/A"}
-              </div>
+
               <div className="p_price font-bold text-xl text-slate-950 ">
                 Rs : {item.price}
               </div>
