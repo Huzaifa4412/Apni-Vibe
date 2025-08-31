@@ -18,7 +18,7 @@ const Page = () => {
       <div className="productsContainer flex flex-wrap justify-center  flex-shrink-0  gap-[8px]">
         {data !== undefined &&
           data
-            .filter((data) => data.new)
+            .filter((data) => data.isNew)
             .map((product: Product) => (
               <ProductCard key={product._id} item={product} />
             ))}
