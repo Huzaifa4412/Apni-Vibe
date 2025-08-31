@@ -24,6 +24,8 @@ export default function NewArrivals() {
   let { data } = useContext(DataContext) as ContextType;
   data = data.filter((data) => data.isNew);
 
+
+
   data.splice(4);
 
   return (
