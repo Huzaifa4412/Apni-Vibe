@@ -2,7 +2,6 @@
 import { createContext, useEffect, useState } from "react";
 import { Product } from "../../../Typing";
 import { getAllProducts } from "@/sanity/lib/data";
-import datas from "@/Data.json";
 
 export interface ContextType {
     data: Product[];
@@ -14,7 +13,6 @@ export const DataContext = createContext<ContextType | undefined>(undefined);
 const DataProvider = ({ children }: { children: React.ReactNode }) => {
     const [data, setData] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    console.log(datas);
 
     useEffect(() => {
         const data = async () => {

@@ -4,8 +4,8 @@ export const revalidate = 10;
 
 export async function getProducts() {
     try {
-        const quary = `*[_type == "product"]{name,"image":image.asset -> url,rating, price, discountPercent,_id, discountedPrice }`
-        const products = await client.fetch(quary)
+        const query = `*[_type == "product"]{name,"image":image.asset -> url,rating, price, discountPercent,_id, discountedPrice }`
+        const products = await client.fetch(query)
         return products
     } catch (error) {
         console.log("Error >>>", error)
@@ -15,12 +15,32 @@ export async function getProducts() {
 
 export async function getAllProducts() {
     try {
-        const quary = `*[_type == "product"]{name,"image":image.asset -> url,rating, price, sale, new ,discountPercent, discountedPrice, _id, category,colors, sizes}`;
-        const products = await client.fetch(quary)
-        return products
-    }
-    catch (error) {
-        console.log("Error >>>", error)
-        return null
+        const query = `*[_type == "product"]{
+    _id,
+    _type,
+    name,
+    price,
+    description,
+    "image": image.asset->url,
+    "other_images": other_images[].asset->url,
+    "category":category->title,
+    isNew,
+    sale,
+    discountPercent,
+    "discountedPrice": select(
+      sale == true && defined(discountPercent) => price - ((price * discountPercent) / 100),
+      price
+    ),
+    rating,
+    quantity
+  }
+`;
+
+
+        const products = await client.fetch(query);
+        return products;
+    } catch (error) {
+        console.error("Error fetching products >>>", error);
+        return null;
     }
 }

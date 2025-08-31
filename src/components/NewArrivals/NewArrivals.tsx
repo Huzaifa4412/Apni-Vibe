@@ -22,7 +22,7 @@ import { ContextType, DataContext } from "@/app/context/ProductContext";
 export default function NewArrivals() {
   // const data = await getProduct();
   let { data } = useContext(DataContext) as ContextType;
-  data = data.filter((data) => data.new);
+  data = data.filter((data) => data.isNew);
 
   data.splice(4);
 

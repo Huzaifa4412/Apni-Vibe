@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import Button from "../Button/Button";
 import { addComments } from "@/actions/Comments";
 import Select from "../ui/select";
+import Heading from "../Heading/Heading";
 
 const formScheme = z.object({
   name: z.string().min(3, { message: "Name is required" }).max(50),
@@ -63,78 +64,83 @@ const CommentForm = ({ postID }: { postID: string }) => {
   };
   return (
     <>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit((data, event) => onSubmit(data, event))}
-          className="space-y-4"
-        >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input type="name" placeholder="Enter your Name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <div className="mt-20 max-w-[800px] ">
+        <Heading text="Leave a Review" />
+        <br />
 
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="message"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Comment</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Tell us a little bit about experience"
-                    className="resize-none"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <div className="">
-            <h1 className="text-2xl font-bold mb-4"> Select Rating</h1>
-            <Select
-              options={options}
-              value={selectedValue}
-              onChange={handleChange}
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit((data, event) => onSubmit(data, event))}
+            className="space-y-4"
+          >
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input type="name" placeholder="Enter your Name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-            {selectedValue && (
-              <p className="my-8">
-                Selected Value :{" "}
-                <span className="font-bold text-lg">{selectedValue}</span>
-              </p>
-            )}
-          </div>
-          <Button text={loading ? "Submitting ..." : "Submit"} dark_variant />
-        </form>
-      </Form>
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="Enter your email"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="message"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Comment</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Tell us a little bit about experience"
+                      className="resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div className="">
+              <h1 className="text-2xl font-bold mb-4"> Select Rating</h1>
+              <Select
+                options={options}
+                value={selectedValue}
+                onChange={handleChange}
+              />
+              {selectedValue && (
+                <p className="my-8">
+                  Selected Value :{" "}
+                  <span className="font-bold text-lg">{selectedValue}</span>
+                </p>
+              )}
+            </div>
+            <Button text={loading ? "Submitting ..." : "Submit"} dark_variant />
+          </form>
+        </Form>
+      </div>
     </>
   );
 };

@@ -1,18 +1,20 @@
 export interface Product {
     _id: string;
+    _type: string;
     name: string;
-    rating: number;
-    discountPercent: number;
-    colors: string[];
-    image: string;
-    category: string;
-    price: string;
-    sizes: string[];
+    price: number;
     description: string;
-    discountedPrice: string;
-    new: boolean;
-    sale: boolean
+    image: string;
+    other_images?: string[];
+    category: string; // ab direct string hai, object nahi
+    isNew?: boolean;
+    sale?: boolean;
+    discountPercent?: number;
+    discountedPrice: number;
+    rating?: number;
+    quantity?: number;
 }
+
 
 
 export interface formData {
@@ -40,8 +42,7 @@ export interface Cart {
     image: string;
     qty: number;
     price: string;
-    p_color: string;
-    p_size: string;
+
 }
 
 export interface customerInfo {

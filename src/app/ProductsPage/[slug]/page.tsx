@@ -4,7 +4,7 @@ import { Watch } from "react-loader-spinner";
 import Image from "next/image";
 import Heading from "@/components/Heading/Heading";
 import Button from "@/components/Button/Button";
-import { Cart } from "../../../../Typing";
+import { Cart, Product } from "../../../../Typing";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/features/cartSlice";
@@ -18,36 +18,29 @@ import CommentList from "@/components/CommentSection/Comments";
 
 // import MightLike from "@/components/MightLike/MightLike";
 
-// Define proper types
-interface ProductResponse {
-  name: string;
-  rating: number;
-  discountPercent: number;
-  colors: string[];
-  image: string;
-  category: string;
-  price: string;
-  sizes: string[];
-  description: string;
-  discountedPrice: string;
-  _id: string;
-}
-async function getSingleProduct(slug: string): Promise<ProductResponse | null> {
+
+async function getSingleProduct(slug: string): Promise<Product | null> {
   try {
     const query = `*[_type == "product" && _id == $slug][0]{
-      name, 
-      rating, 
-      discountPercent, 
-      colors, 
-      "image":image.asset->url,
-      category,
-      price,
-      sizes,
-      description,
-      discountedPrice, 
-      _id
+      _id,
+    _type,
+    name,
+    price,
+    description,
+    "image": image.asset->url,
+    "other_images": other_images[].asset->url,
+    "category":category->title,
+    isNew,
+    sale,
+    discountPercent,
+    "discountedPrice": select(
+      sale == true && defined(discountPercent) => price - ((price * discountPercent) / 100),
+      price
+    ),
+    rating,
+    quantity
     }`;
-    const product = await client.fetch<ProductResponse>(query, { slug });
+    const product = await client.fetch<Product>(query, { slug });
     return product;
   } catch (error) {
     console.error("Error fetching product:", error);
@@ -58,12 +51,15 @@ const Page = ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
   const router = useRouter();
   const dispatch = useDispatch();
-  const [p_size, setP_Size] = useState<string>();
-  const [p_color, setP_Color] = useState<string>();
   const [p_qty, setP_qty] = useState<number>(1);
-  const [product, setProduct] = useState<ProductResponse | null>(null);
+  const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [mainImage, setMainImage] = useState<string>("");
+
+
+
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -116,10 +112,14 @@ const Page = ({ params }: { params: { slug: string } }) => {
     discountedPrice,
     description,
     image,
+    other_images,
     discountPercent,
-    sizes,
-    colors,
+    quantity,
+    sale
   } = product;
+
+
+
   const AddToCartHandler = (data: Cart) => {
     try {
       dispatch(addToCart(data));
@@ -153,15 +153,57 @@ const Page = ({ params }: { params: { slug: string } }) => {
       </div>
 
       <div className="productDetails flex lg:flex-row flex-col gap-8">
-        <div className="productImages flex flex-col items-center lg:flex-row gap-4">
+        <div className="productImages flex flex-col items-center gap-4">
+          {/* Main Image */}
           <div className="mainImage order-1 sm:h-[530px] overflow-hidden w-[330px] h-[290px] sm:w-[444px] bg-[#F0EEED] rounded-[20px]">
             <Image
-              src={image ?? ""}
+              src={mainImage !== "" ? mainImage : image}
               alt={name ?? "Product"}
               width={444}
               height={530}
-              className="object-cover overflow-hidden w-full h-full"
+              className="object-cover w-full h-full"
             />
+          </div>
+
+          {/* Other Images */}
+          <div
+            className="
+      other_images 
+      order-2 
+      flex items-center justify-start 
+      gap-3 
+      w-full
+      max-w-[700px] 
+      overflow-x-auto 
+      sm:flex-wrap sm:justify-center
+      scrollbar-hide
+    "
+          >
+            {other_images && other_images.length > 0 ? (
+              other_images.map((img, index) => (
+
+                <>
+                  <Image
+                    key={index}
+                    src={img}
+                    alt={`${name} - Image ${index + 1}`}
+                    width={150}
+                    height={100}
+                    className="
+            object-cover 
+            w-[110px] h-[100px] 
+            sm:w-[160px] sm:h-[120px] 
+            rounded-[12px] bg-[#F0EEED] 
+            flex-shrink-0
+          "
+                    onClick={() => setMainImage(img)}
+                  />
+
+                </>
+              ))
+            ) : (
+              <p>No additional images available</p>
+            )}
           </div>
         </div>
 
@@ -169,67 +211,38 @@ const Page = ({ params }: { params: { slug: string } }) => {
           <div>
             <Heading text={name ?? ""} />
           </div>
-          {rating && <Rating rating={rating} />}
-          <div className="price text-[32px] font-bold gap-2 flex items-center">
-            <h2>Rs {discountedPrice}</h2>
-            <h2 className="line-through text-slate-400">Rs {price}</h2>
-            {discountPercent > 0 && (
-              <div className="tag w-[72px] h-[34px] rounded-[62px] bg-red-200 text-red-500 text-xl flex items-center justify-center font-medium">
-                {discountPercent}%
-              </div>
-            )}
-          </div>
 
+          {rating && <Rating rating={rating} />}
+          {
+            sale && discountPercent && discountPercent > 0 ? (
+              <div className="price text-[32px] font-bold gap-2 flex items-center">
+                <h2>Rs {discountedPrice}</h2>
+                <h2 className="line-through text-slate-400">Rs {price}</h2>
+                {discountPercent && discountPercent > 0 && (
+                  <div className="tag w-[72px] h-[34px] rounded-[62px] bg-red-200 text-red-500 text-xl flex items-center justify-center font-medium">
+                    {discountPercent}%
+                  </div>
+                )}
+              </div>
+            ) :
+              (
+                <div className="price text-[32px] font-bold gap-2 flex items-center">
+                  <h2>Rs {price}</h2>
+                </div>
+              )
+          }
+          <div className="qty">
+            <p className="text-slate-500 text-[16px] font-medium">
+              {quantity && quantity > 0 ? `In Stock: ${quantity}` : "Out of Stock"}
+            </p>
+          </div>
           <div className="description">
             <p className="text-slate-500 text-[16px] font-medium">
               {description}
             </p>
           </div>
 
-          <div>
-            <hr />
-          </div>
 
-          <div className="selectedColors flex flex-col my-2 gap-2">
-            <h3 className="font-medium text-xl">Select Colors</h3>
-            <div className="colors_container flex gap-2">
-              {colors?.map((color, index) => (
-                <div
-                  key={index}
-                  onClick={() => setP_Color(color)}
-                  className={`color w-[37px] ${
-                    p_color === color && "border-2 border-black p-1 scale-110"
-                  } h-[37px] rounded-full border-2 hover:border-black hover:bg-black focus:border-2 focus:border-black`}
-                  style={{ backgroundColor: color }}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <hr />
-          </div>
-
-          <div className="chooseSize flex flex-col gap-2">
-            <h3 className="font-medium text-xl">Select Size</h3>
-            <div className="sizes_container grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 w-max gap-2">
-              {sizes?.map((size, index) => (
-                <div
-                  className={`w-max flex-shrink-0 ${
-                    p_size === size && "invert"
-                  }`}
-                  key={index}
-                  onClick={() => setP_Size(size)}
-                >
-                  <Button dark_variant={false} text={size} />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <hr />
-          </div>
 
           <div className="flex gap-5">
             <div className="q_btns bg-[#F0F0F0] w-[170px] hover:bg-slate-200 rounded-[62px] py-[12px] px-[20px] flex items-center justify-between">
@@ -257,8 +270,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
                   image: image,
                   qty: p_qty,
                   price: discountedPrice?.toString() || price?.toString(),
-                  p_color: p_color || "Random",
-                  p_size: p_size || "Random",
+
                 })
               }
             >

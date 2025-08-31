@@ -1,4 +1,4 @@
-import { defineType } from "sanity"
+import { defineType } from 'sanity';
 
 export default defineType({
     name: 'product',
@@ -9,11 +9,14 @@ export default defineType({
             name: 'name',
             title: 'Name',
             type: 'string',
+            validation: Rule => Rule.required().error('This field is required').max(96),
+            description: "Title of the product"
         },
         {
             name: 'price',
-            title: 'Price',
+            title: 'Actual Price',
             type: 'number',
+            validation: Rule => Rule.required().min(0)
         },
         {
             name: 'description',
@@ -22,39 +25,27 @@ export default defineType({
         },
         {
             name: 'image',
-            title: 'Image',
+            title: 'Main Image',
             type: 'image',
+            options: { hotspot: true }
+        },
+        {
+            name: "other_images",
+            title: "Other Images",
+            type: 'array',
+            of: [{ type: 'image' }]
         },
         {
             name: "category",
             title: "Category",
-            type: 'string',
-            options: {
-                list: [
-                    { title: 'T-Shirt', value: 'tshirt' },
-                    { title: 'Short', value: 'short' },
-                    { title: 'Jeans', value: 'jeans' },
-                    { title: 'Hoddie', value: 'hoodie' },
-                    { title: 'Shirt', value: 'shirt' },
-                ]
-            }
+            type: 'reference',
+            to: [{ type: 'categories' }]
         },
+
         {
-            name: "discountPercent",
-            title: "Discount Percent",
-            type: 'number',
-        },
-        {
-            name: "discountedPrice",
-            title: "Discounted Price",
-            type: 'number',
-            readOnly: true,
-            calculate: (obj: any) => obj.price - (obj.price * obj.discountPercent / 100),
-        } as any,
-        {
-            name: "new",
+            name: "isNew",
             type: 'boolean',
-            title: "New",
+            title: "New Arrival",
         },
         {
             name: "sale",
@@ -62,33 +53,32 @@ export default defineType({
             title: "On Sale",
         },
         {
+            name: "discountPercent",
+            title: "Discount Percent",
+            type: 'number',
+            validation: Rule => Rule.min(0).max(100),
+            hidden: ({ document }) => document?.sale !== true,
+        },
+        {
+            name: "discountedPrice",
+            title: "Discounted Price",
+            type: 'number',
+            readOnly: true,
+            description: "Auto-calculated based on price and discountPercent",
+            hidden: ({ document }) => document?.sale !== true,
+
+        },
+        {
             name: "rating",
             type: 'number',
             title: "Rating",
-            description: "Rating from 1 to 5",
+            validation: Rule => Rule.integer().min(1).max(5),
         },
         {
             name: "quantity",
             type: 'number',
             title: "Quantity",
-            description: "Quantity in stock",
-        },
-
-        {
-            name: "colors",
-            title: "Colors",
-            type: 'array',
-            of: [
-                { type: 'string' }
-            ]
-        },
-        {
-            name: "sizes",
-            title: "Sizes",
-            type: 'array',
-            of: [
-                { type: 'string' }
-            ]
+            validation: Rule => Rule.min(0),
         }
     ],
-})
+});
