@@ -24,7 +24,7 @@ const Page = () => {
       <div className="products_container flex flex-wrap mt-5 justify-center gap-[14px]">
         {data
           .filter(
-            (product: Product) => product.sale && product.discountPercent > 0
+            (product: Product) => product.sale && product.discountPercent && product.discountedPrice > 0
           )
           .map((product: Product) => (
             <ProductCard key={product._id} item={product} />
