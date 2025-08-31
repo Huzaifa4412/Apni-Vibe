@@ -97,13 +97,13 @@ const Navbar = () => {
           }}
         />
         <Link href={"/"} className="order-1 sm:order-2">
-          <div className={`${Styles.logo} text-[32px] font-ld `}>SHOP.CO</div>
+          {/* <div className={`${Styles.logo} text-[32px] font-ld `}>SHOP.CO</div> */}
+          <Image src={"/logo.svg"} alt="Logo" width={100} height={100} />
         </Link>
         <div className={`${Styles.nav_items} order-1 sm:order-2`}>
           <ul
-            className={`hidden ${Styles.nav_list} duration-500 relative ${
-              isMenuOpen ? `${Styles.active}` : ""
-            } md:flex text-[16px]  gap-[22px] items-center font-medium`}
+            className={`hidden ${Styles.nav_list} duration-500 relative ${isMenuOpen ? `${Styles.active}` : ""
+              } md:flex text-[16px]  gap-[22px] items-center font-medium`}
           >
             <li
               className="flex items-center gap-1 relative"
