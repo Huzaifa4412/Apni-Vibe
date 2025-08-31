@@ -23,7 +23,7 @@ import { ContextType, DataContext } from "@/app/context/ProductContext";
 export default function TopSelling() {
 
   const { data } = useContext(DataContext) as ContextType;
-  const filteredData = data.filter((data) => data.isNew);
+  const filteredData = data.filter((data) => data.top_selling === true);
 
   data.splice(4);
 
