@@ -22,8 +22,8 @@ import { ContextType, DataContext } from "@/app/context/ProductContext";
 
 export default function TopSelling() {
 
-  let { data } = useContext(DataContext) as ContextType;
-  data = data.filter((data) => data.top_selling);
+  const { data } = useContext(DataContext) as ContextType;
+  const filteredData = data.filter((data) => data.isNew);
 
   data.splice(4);
 
@@ -33,8 +33,8 @@ export default function TopSelling() {
     >
       <Heading text="Top Selling" />
       <div className="productsContainer flex flex-wrap flex-shrink-0 justify-center  gap-[8px]">
-        {data !== undefined &&
-          data.map((product: Product) => (
+        {filteredData !== undefined &&
+          filteredData.map((product: Product) => (
             <ProductCard key={product._id} item={product} />
           ))}
       </div>

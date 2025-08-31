@@ -21,8 +21,8 @@ import { ContextType, DataContext } from "@/app/context/ProductContext";
 // };
 export default function NewArrivals() {
   // const data = await getProduct();
-  let { data } = useContext(DataContext) as ContextType;
-  data = data.filter((data) => data.isNew);
+  const { data } = useContext(DataContext) as ContextType;
+  const filteredData = data.filter((data) => data.isNew);
 
 
 
@@ -35,8 +35,8 @@ export default function NewArrivals() {
     >
       <Heading text="New Arrivals" />
       <div className="productsContainer flex flex-wrap justify-center  flex-shrink-0  gap-[8px]">
-        {data !== undefined &&
-          data.map((product: Product) => (
+        {filteredData !== undefined &&
+          filteredData.map((product: Product) => (
             <ProductCard key={product._id} item={product} />
           ))}
       </div>
