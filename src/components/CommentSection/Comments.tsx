@@ -91,7 +91,7 @@ function Testimonials({
   createdData: string;
 }) {
   return (
-    <div className="testimonial cursor-grab justify-evenly min-w-[340px] flex-shrink-0 mx-auto flex flex-col gap-2 px-[32px] py-[24px] border-2 rounded-[20px]">
+    <div className="testimonial cursor-grab justify-center min-w-[340px] flex-shrink-0 mx-auto flex flex-col gap-3 px-[32px] py-[24px] border-2 rounded-[20px]">
       <Rating rating={Number(item.rating) || 0} />
       <div className="intro flex gap-2">
         <div className="name text-xl font-semibold">{item.name}</div>
