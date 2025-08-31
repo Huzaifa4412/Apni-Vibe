@@ -35,8 +35,7 @@ const createOrderInSanity = async (cartData: Cart[], customerId: string) => {
           product_name: item.title,
           product_price: item.price,
           product_total: item.qty * Number(item.price),
-          product_color: item.p_color,
-          product_size: item.p_size,
+
           product_quantity: item.qty,
         };
       }),
