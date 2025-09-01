@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <div className={`${Styles.HeroSection} relative container`}>
+    <div className={`${Styles.HeroSection} relative mx-auto max-w-[1440px]`}>
       <div
         className={`${Styles.leftPart} w-1/2 flex flex-col relative  gap-10`}
       >
@@ -32,9 +32,9 @@ const Hero = () => {
         </div>
 
         <div className="featureText flex flex-wrap gap-6 justify-center">
-          <HeroFeatureText text="International Brands" number="200+" />
-          <HeroFeatureText text="High-Quality Products" number="2,000+" />
-          <HeroFeatureText text="Happy Customers" number="30,000+" />
+          <HeroFeatureText text="International Brands" number="30" />
+          <HeroFeatureText text="High-Quality Products" number="500" />
+          <HeroFeatureText text="Happy Customers" number="50" />
         </div>
       </div>
       <div className={` ${Styles.rightPart} w-1/2 right-0  relative h-full`}>

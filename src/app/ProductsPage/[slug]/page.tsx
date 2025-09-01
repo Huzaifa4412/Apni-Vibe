@@ -155,7 +155,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
         <h3 className="font-semibold">{category}</h3>
       </div>
 
-      <div className="productDetails flex lg:flex-row flex-col gap-8">
+      <div className="productDetails flex lg:flex-row flex-col gap-8 mt-10" >
         <div className="productImages flex flex-col items-center gap-4">
           {/* Main Image */}
           <div className="mainImage order-1 overflow-hidden w-[330px] h-[290px] sm:w-[444px] bg-[#F0EEED] rounded-[20px]">

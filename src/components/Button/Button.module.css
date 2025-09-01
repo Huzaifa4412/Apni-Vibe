@@ -7,6 +7,11 @@
   font-weight: 500 !important;
   transition: 0.3s all cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+.button:hover {
+  transform: scale(1.01);
+  border: 2px solid black;
+  cursor: pointer;
+}
 
 .dark_variant {
   background-color: black;

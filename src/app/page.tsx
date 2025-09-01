@@ -1,4 +1,4 @@
-import Brands from "@/components/Brands/Brands";
+// import Brands from "@/components/Brands/Brands";
 import DressStyle from "@/components/DressStyle/DressStyle";
 import Hero from "@/components/HeroSection/Hero";
 import NewArrivals from "@/components/NewArrivals/NewArrivals";
@@ -10,7 +10,7 @@ const page = () => {
     return (
         <div>
             <Hero />
-            <Brands />
+            {/* <Brands /> */}
             <NewArrivals />
             <TopSelling />
             <DressStyle />
