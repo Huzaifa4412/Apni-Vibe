@@ -14,9 +14,9 @@ const Hero = () => {
         className={`${Styles.leftPart} w-1/2 flex flex-col relative  gap-10`}
       >
         <h1
-          className={`xl:text-[64px] text-left lg:w-full lg:text-[48px] lg:leading-[50px]  text-[40px]  leading-[42px] font-extrabold xl:leading-[64px]`}
+          className={`xl:text-[64px] text-left uppercase lg:w-full lg:text-[48px] lg:leading-[50px]  text-[40px]  leading-[42px] font-extrabold xl:leading-[64px]`}
         >
-          FIND CLOTHES THAT MATCHES YOUR STYLE
+          Find your choice that suits your vibes
         </h1>
         <p
           className={`${Styles.paragraphs}  text-[16px] font-medium text-[#000000]/60`}

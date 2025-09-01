@@ -15,6 +15,9 @@ import MightLike from "@/components/MightLike/MightLike";
 import CommentForm from "@/components/CommentSection/CommentForm";
 import CommentList from "@/components/CommentSection/Comments";
 import { space_grotesk } from "@/lib/fonts";
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
+
 
 // import MightLike from "@/components/MightLike/MightLike";
 
@@ -155,16 +158,18 @@ const Page = ({ params }: { params: { slug: string } }) => {
       <div className="productDetails flex lg:flex-row flex-col gap-8">
         <div className="productImages flex flex-col items-center gap-4">
           {/* Main Image */}
-          <div className="mainImage order-1 sm:h-[530px] overflow-hidden w-[330px] h-[290px] sm:w-[444px] bg-[#F0EEED] rounded-[20px]">
-            <Image
-              src={mainImage !== "" ? mainImage : image}
-              alt={name ?? "Product"}
-              width={444}
-              height={530}
-              className="object-cover w-full h-full"
-            />
-          </div>
+          <div className="mainImage order-1 overflow-hidden w-[330px] h-[290px] sm:w-[444px] bg-[#F0EEED] rounded-[20px]">
+            <Zoom>
+              <Image
+                src={mainImage !== "" ? mainImage : image}
+                alt={name ?? "Product"}
+                width={444}
+                height={530}
+                className="!object-cover w-full h-full"
+              />
 
+            </Zoom>
+          </div>
           {/* Other Images */}
           <div
             className="
@@ -210,7 +215,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
         <div className="details flex flex-col gap-4">
           <div>
             {/* <Heading text={name ?? ""} /> */}
-            <h2 className={`${space_grotesk.className}  text-center sm:text-left w-full uppercase px-2`}>
+            <h2 className={`${space_grotesk.className} md:text-4xl font-bold text-3xl text-center sm:text-left w-full uppercase px-2`}>
               {name ?? ""}
             </h2>
           </div>
@@ -286,7 +291,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
       {/* <Review /> */}
       <CommentList postID={product._id} />
       <MightLike category={category} />
-    </div>
+    </div >
   );
 };
 

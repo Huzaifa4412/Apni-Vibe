@@ -1,9 +1,13 @@
+'use client'
+
 import React, { useState } from "react";
 import MultiRangeSlider from "multi-range-slider-react";
 const RangeSlider = ({
   filterByPrice,
+  highPrice,
 }: {
   filterByPrice: (lowPrice: number, highPrice: number) => void;
+  highPrice: number;
 }) => {
   const [minValue, setMinValue] = useState<number>(200);
   const [maxValue, setMaxValue] = useState<number>(400);
@@ -20,9 +24,9 @@ const RangeSlider = ({
         {/* Wrap slider with a styled div */}
         <MultiRangeSlider
           min={0}
-          max={500}
-          minValue={minValue}
-          maxValue={maxValue}
+          max={highPrice}
+          minValue={0}
+          maxValue={highPrice}
           onInput={handleInput}
           label={false}
           ruler={false}
@@ -63,9 +67,9 @@ const RangeSlider = ({
       <p className="text-gray-500">
         Selected range:{" "}
         <span className="font-bold">
-          <br />${minValue}
+          <br />Rs {minValue}
         </span>{" "}
-        - <span className="font-bold">${maxValue}</span>
+        - <span className="font-bold">Rs {maxValue}</span>
       </p>
     </div>
   );

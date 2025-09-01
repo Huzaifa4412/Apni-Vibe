@@ -70,8 +70,8 @@ const Navbar = () => {
       >
         <div className="flex items-center md:text-[14px] text-[11px] relative justify-center h-full max-w-[1440px] mx-auto">
           <p className="font-medium">
-            Sign up and get 20% off to your first order.{" "}
-            <span className="underline">Sign Up Now</span>
+            Get 20% off to your first order.{" "}
+            <span className=" px-3 py-1 rounded-full">Shop Now</span>
           </p>
           <Image
             src={"/cross.svg"}
@@ -98,7 +98,7 @@ const Navbar = () => {
         />
         <Link href={"/"} className="order-1 sm:order-2">
           {/* <div className={`${Styles.logo} text-[32px] font-ld `}>SHOP.CO</div> */}
-          <Image src={"/logo.svg"} alt="Logo" width={100} height={100} />
+          <Image src={"/logo-main.svg"} alt="Logo" className="w-auto h-[70px] object-cover rounded-full" width={100} height={100} />
         </Link>
         <div className={`${Styles.nav_items} order-1 sm:order-2`}>
           <ul
@@ -141,9 +141,7 @@ const Navbar = () => {
             <li onClick={() => setMenuOpen(false)}>
               <Link href={"/NewArrivals"}>New Arrival</Link>
             </li>
-            <li onClick={() => setMenuOpen(false)}>
-              <Link href={"/"}>Brands</Link>
-            </li>
+
             <Image
               src={"/cross.svg"}
               alt="Cross Icon"
@@ -319,7 +317,7 @@ const Navbar = () => {
         </div>
       </nav>
       <hr className=" h-[1px] mx-auto max-w-[1440px]" />
-    </div>
+    </div >
   );
 };
 

@@ -11,11 +11,9 @@ import { type ContextType, DataContext } from "../context/ProductContext";
 import { toast } from "react-toastify";
 
 interface Filter {
-  category?: string;
+  category?: string | number;
   lowPrice: number;
   highPrice: number;
-  size?: string;
-  color?: string;
 }
 
 const Page = () => {
@@ -26,6 +24,8 @@ const Page = () => {
     highPrice: Math.max(...data.map((item) => Number(item.price))),
   });
 
+  const high_price = Math.max(...data.map((item) => Number(item.price)));
+
   const applyFilters = () => {
     const filteredData = data.filter((item) => {
       const categoryMatch =
@@ -33,18 +33,8 @@ const Page = () => {
       const priceMatch =
         Number(item.price) >= filterConfig.lowPrice &&
         Number(item.price) <= filterConfig.highPrice;
-      const colorMatch =
-        !filterConfig.color ||
-        item.colors.some(
-          (c) => c.toLowerCase() === filterConfig.color?.toLowerCase()
-        );
-      const sizeMatch =
-        !filterConfig.size ||
-        item.sizes.some(
-          (s) => s.toLowerCase() === filterConfig.size?.toLowerCase()
-        );
 
-      return categoryMatch && priceMatch && colorMatch && sizeMatch;
+      return categoryMatch && priceMatch;
     });
     setProducts(filteredData);
   };
@@ -63,20 +53,8 @@ const Page = () => {
   };
 
   const categories = Array.from(new Set(data.map((item) => item.category)));
-  const colors = Array.from(
-    new Set(
-      data.flatMap((item) => item.colors.map((color) => color.toLowerCase()))
-    )
-  );
-  const sizes = Array.from(
-    new Set(
-      data.flatMap((item) => item.sizes.map((size) => size.toLowerCase()))
-    )
-  );
 
   const [showPrice, setShowPrice] = useState(false);
-  const [showColors, setShowColors] = useState(false);
-  const [showSizes, setShowSizes] = useState(false);
   const [showSideBar, setShowSideBar] = useState(false);
 
   return (
@@ -145,73 +123,12 @@ const Page = () => {
                   className={`transition-all duration-300 ${showPrice ? "max-h-screen" : "max-h-0 overflow-hidden"}`}
                 >
                   <RangeSlider
+                    highPrice={high_price}
                     filterByPrice={(low, high) => {
                       updateFilter("lowPrice", low);
                       updateFilter("highPrice", high);
                     }}
                   />
-                </div>
-              </div>
-              <hr />
-              <div className="colors flex flex-col gap-3">
-                <header
-                  className="flex items-center justify-between cursor-pointer"
-                  onClick={() => setShowColors(!showColors)}
-                >
-                  <h2 className="font-bold text-xl">Colors</h2>
-                  <Image
-                    src={"/arrow.svg"}
-                    alt="Arrow"
-                    width={16}
-                    height={16}
-                    className={`transform transition-transform duration-300 ${showColors ? "rotate-180" : ""}`}
-                  />
-                </header>
-                <div
-                  className={`colorsContainer flex gap-3 flex-wrap transition-all duration-300 ${
-                    showColors ? "max-h-screen" : "max-h-0 overflow-hidden"
-                  }`}
-                >
-                  {colors.map((color) => (
-                    <div
-                      key={color}
-                      className={`color w-[37px] h-[37px] rounded-full hover:border-4 border-[#f2f2f2] cursor-pointer`}
-                      style={{ backgroundColor: color }}
-                      onClick={() => updateFilter("color", color)}
-                    ></div>
-                  ))}
-                </div>
-              </div>
-              <hr />
-              <div className="size flex flex-col gap-3">
-                <header
-                  className="flex items-center justify-between cursor-pointer"
-                  onClick={() => setShowSizes(!showSizes)}
-                >
-                  <h2 className="font-bold text-xl">Sizes</h2>
-                  <Image
-                    src={"/arrow.svg"}
-                    alt="Arrow"
-                    width={16}
-                    height={16}
-                    className={`transform transition-transform duration-300 ${showSizes ? "rotate-180" : ""}`}
-                  />
-                </header>
-                <div
-                  className={`colorsContainer flex gap-3 flex-wrap transition-all duration-300 ${
-                    showSizes ? "max-h-screen" : "max-h-0 overflow-hidden"
-                  }`}
-                >
-                  {sizes.map((size) => (
-                    <div
-                      key={size}
-                      style={{ fontSize: 16 }}
-                      onClick={() => updateFilter("size", size)}
-                      className={`size py-[10px] uppercase px-[20px] rounded-[20px] bg-[#F0F0F0] hover:bg-black duration-150 hover:text-white cursor-pointer`}
-                    >
-                      {size}
-                    </div>
-                  ))}
                 </div>
               </div>
               <div
