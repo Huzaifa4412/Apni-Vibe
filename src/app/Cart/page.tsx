@@ -54,15 +54,15 @@ const Page = () => {
               </div>
               <div className="font-bold text-lg sm:text-2xl">Rs {total}</div>
             </div>
-            <div className="discount w-full flex items-center justify-between">
+            {/* <div className="discount w-full flex items-center justify-between">
               <div className="text-[#000000]/60 text-lg sm:text-2xl">
                 Delivery Fee
               </div>
 
               <div className="font-bold text-base sm:text-lg text-red-500">
-                -Rs {15}
+                +Rs {50}
               </div>
-            </div>
+            </div> */}
             {/* <div className="Delivery_Fee w-full flex items-center justify-between">
               <div className="text-[#000000]/60 text-lg sm:text-2xl">
                 Delivery Fee
@@ -75,7 +75,7 @@ const Page = () => {
             <div className="total w-full flex items-center justify-between">
               <div className="text-[#000000]/60 text-lg sm:text-2xl">Total</div>
               <div className="font-bold text-lg sm:text-2xl">
-                Rs {total ? total - 15 : 0}
+                Rs {total}
               </div>
             </div>
             <div className="checkout_btn">

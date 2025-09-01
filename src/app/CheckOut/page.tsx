@@ -1,32 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/app/store";
 import { Cart } from "../../../Typing";
-import CheckOut from "@/actions/CheckOut";
+// import CheckOut from "@/actions/CheckOut";
 import { toast } from "react-toastify";
-import { createCheckoutSession } from "@/actions/StripeCheckOut";
+// import { createCheckoutSession } from "@/actions/StripeCheckOut";
 import { clearCart } from "@/store/features/cartSlice";
 
 export default function CheckoutPage() {
-    const HandleCheckOut = async (cart: Cart[]) => {
-        const sessionUrl = await createCheckoutSession(cart);
-        toast.success("Payment Successful! Your order is being processed.");
-        if (sessionUrl) {
-            window.location.href = sessionUrl;
-        } else {
-            toast.error("Failed to create Stripe session.");
-        }
-    };
+    // const HandleCheckOut = async (cart: Cart[]) => {
+    //     const sessionUrl = await createCheckoutSession(cart);
+    //     toast.success("Payment Successful! Your order is being processed.");
+    //     if (sessionUrl) {
+    //         window.location.href = sessionUrl;
+    //     } else {
+    //         toast.error("Failed to create Stripe session.");
+    //     }
+    // };
     const { cart } = useSelector((state: RootState) => state.cartReducer);
     const dispatch = useDispatch();
     const total = cart.reduce(
         (total, curr: Cart) => total + Number(curr.price) * curr.qty,
         0
     );
-    const [shippingMethod, setShippingMethod] = useState("standard");
+    const formattedData = cart
+        .map(
+            (product) =>
+                `product : ${product.title} → quantity : ${product.qty} -> Product ID: ${product.id}`
+        )
+        .join("\n\n");
+
+    // const [shippingMethod, setShippingMethod] = useState("standard");
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -35,7 +42,8 @@ export default function CheckoutPage() {
         city: "",
         phone: "",
         postalCode: "",
-        country: "",
+        message: ""
+        // country: "",
     });
 
     const handleChange = (
@@ -54,21 +62,17 @@ export default function CheckoutPage() {
                     Checkout
                 </h1>
                 <form
+                    action="https://formspree.io/f/mdkldywo"
+                    method="POST"
                     className="space-y-8"
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        CheckOut(formData, cart);
+                    onSubmit={() => {
+                        // e.preventDefault();
+                        // CheckOut(formData, cart);
                         toast.success("Order Placed Successfully 🎉");
-                        setFormData({
-                            firstName: "",
-                            lastName: "",
-                            email: "",
-                            address: "",
-                            city: "",
-                            phone: "",
-                            postalCode: "",
-                            country: "",
-                        });
+                        setTimeout(() => {
+                            dispatch(clearCart());
+                        }, 1000)
+
                     }}
                 >
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
@@ -90,6 +94,7 @@ export default function CheckoutPage() {
                                         type="text"
                                         id="firstName"
                                         name="firstName"
+
                                         required
                                         onChange={handleChange}
                                         value={formData.firstName}
@@ -200,48 +205,38 @@ export default function CheckoutPage() {
                                         className="w-full px-4 py-3 bg-gray-100 border-b-2 border-gray-300 focus:border-black outline-none transition-colors text-lg"
                                     />
                                 </div>
-                            </div>
-                            <div className="space-y-2 my-5">
-                                <label
-                                    htmlFor="country"
-                                    className="block text-sm font-semibold uppercase tracking-wide"
-                                >
-                                    Country
-                                </label>
-                                <div className="relative">
-                                    <select
-                                        id="country"
-                                        name="country"
-                                        onChange={handleChange}
-                                        value={formData.country}
-                                        required
-                                        className="w-full px-4 py-3 bg-gray-100 border-b-2 border-gray-300 focus:border-black outline-none transition-colors appearance-none text-lg"
+                                <div className="space-y-2">
+                                    <label
+                                        htmlFor="message"
+                                        className="block text-sm font-semibold uppercase tracking-wide"
                                     >
-                                        <option value="">
-                                            Select a country
-                                        </option>
-                                        <option value="United States">
-                                            United States
-                                        </option>
-                                        <option value="Canada">Canada</option>
-                                        <option value="United Kingdom">
-                                            United Kingdom
-                                        </option>
-                                        <option value="Australia">
-                                            Australia
-                                        </option>
-                                    </select>
-                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                        <svg
-                                            className="fill-current h-4 w-4"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20"
-                                        >
-                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                        </svg>
-                                    </div>
+                                        Message (optional)
+                                    </label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        rows={4}
+                                        onChange={handleChange}
+                                        value={formData.message}
+                                        className="w-full px-4 py-3 bg-gray-100 border-b-2 border-gray-300 focus:border-black outline-none transition-colors text-lg"
+                                    />
+                                </div>
+                                <div className="!hidden">
+                                    <label htmlFor="products" className="block text-white mb-2">
+                                        Products
+                                    </label>
+                                    <textarea
+                                        id="products"
+                                        name="products"
+                                        rows={4}
+                                        value={`${formattedData}\n\nTotal Price : Rs ${total + 100}`}
+                                        className="w-full bg-zinc-900 border border-zinc-800 text-white rounded-md px-4 py-3 min-h-[100px]"
+                                        placeholder="Your Products"
+                                        readOnly
+                                    ></textarea>
                                 </div>
                             </div>
+
                         </div>
 
                         {/* Order Summary */}
@@ -263,17 +258,18 @@ export default function CheckoutPage() {
                                         Shipping
                                     </span>
                                     <span className="font-semibold">
-                                        {shippingMethod === "express"
+                                        {/* {shippingMethod === "express"
                                             ? "50"
-                                            : "25"}
+                                            : "25"} */}
+                                        100
                                     </span>
                                 </div>
-                                <div className="flex justify-between items-center">
+                                {/* <div className="flex justify-between items-center">
                                     <span className="text-gray-600">Tax</span>
                                     <span className="font-semibold">
                                         Rs {10}
                                     </span>
-                                </div>
+                                </div> */}
                                 <div className="border-t-2 border-black pt-4 mt-4">
                                     <div className="flex justify-between items-center">
                                         <span className="text-2xl font-bold">
@@ -281,11 +277,13 @@ export default function CheckoutPage() {
                                         </span>
                                         <span className="text-2xl font-bold">
                                             Rs{" "}
-                                            {
+                                            {/* {
                                                 shippingMethod === "express"
-                                                    ? total + 50 + 10 // total + shipping + tax
-                                                    : total + 25 + 10 // total + shipping + tax
-                                            }
+                                                    ? total + 100 + 10 // total + shipping + tax
+                                                    : total + 50 + 10 // total + shipping + tax
+
+                                            } */}
+                                            {total + 100}
                                         </span>
                                     </div>
                                 </div>
@@ -304,7 +302,7 @@ export default function CheckoutPage() {
                                         </span>
                                         <hr />
                                     </div>
-                                    <div className="flex flex-col justify-between gap-1 text-sm text-gray-600">
+                                    <div className="flex flex-col justify-between gap-1 text-sm text-gray-600 flex-1 min-h-[150px]">
                                         {cart.map((item) => {
                                             return (
                                                 <div
@@ -319,7 +317,7 @@ export default function CheckoutPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="mb-10">
+                            {/* <div className="mb-10">
                                 <h3 className="font-semibold text-xl mb-4">
                                     Shipping Method
                                 </h3>
@@ -338,7 +336,7 @@ export default function CheckoutPage() {
                                             className="form-radio text-black focus:ring-2 focus:ring-black"
                                         />
                                         <span className="text-lg">
-                                            Standard Shipping (25)
+                                            Standard Shipping (150)
                                         </span>
                                     </label>
                                     <label className="flex items-center space-x-3 cursor-pointer">
@@ -355,15 +353,15 @@ export default function CheckoutPage() {
                                             className="form-radio text-black focus:ring-2 focus:ring-black"
                                         />
                                         <span className="text-lg">
-                                            Express Shipping (50)
+                                            Express Shipping (250)
                                         </span>
                                     </label>
                                 </div>
-                            </div>
+                            </div> */}
                             <button className="w-full bg-black text-white py-4 rounded-md font-semibold text-lg hover:bg-gray-800 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50">
                                 Place Order
                             </button>
-                            <button
+                            {/* <button
                                 onClick={() => {
                                     HandleCheckOut(cart);
                                     dispatch(clearCart());
@@ -371,8 +369,8 @@ export default function CheckoutPage() {
                                 className="w-full bg-black mt-3 text-white py-4 rounded-md font-semibold text-lg hover:bg-gray-800 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
                             >
                                 Pay Now
-                            </button>
-                            <div className="mt-8 flex justify-center space-x-6">
+                            </button> */}
+                            {/* <div className="mt-8 flex justify-center space-x-6">
                                 <Image
                                     src="/Footer/visa.png"
                                     alt="Visa"
@@ -394,7 +392,7 @@ export default function CheckoutPage() {
                                     height={40}
                                     className="grayscale hover:grayscale-0 transition-all duration-300"
                                 />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </form>

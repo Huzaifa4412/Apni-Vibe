@@ -4,7 +4,8 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Facebook, Instagram } from "lucide-react";
+import Link from "next/link";
 
 export default function AnimatedWaveFooter() {
     return (
@@ -52,29 +53,19 @@ export default function AnimatedWaveFooter() {
                         <h3 className="mb-4 text-lg font-semibold">Quick Links</h3>
                         <nav className="space-y-2 text-sm">
                             <a
-                                href="#"
+                                href="/"
                                 className="block transition-colors hover:text-primary"
                             >
                                 Home
                             </a>
-                            <a
-                                href="#"
-                                className="block transition-colors hover:text-primary"
-                            >
-                                About Us
-                            </a>
-                            <a
-                                href="#"
-                                className="block transition-colors hover:text-primary"
-                            >
-                                Services
-                            </a>
-                            <a
-                                href="#"
-                                className="block transition-colors hover:text-primary"
-                            >
-                                Products
-                            </a>
+                            <Link href={"/ProductsPage"}>All Products</Link>
+
+
+                            <Link href={"/NewArrivals"}>New Arrival</Link>
+
+
+                            {/* <TransitionLink href={"/"} label="On Sale" /> */}
+                            <Link href={"/OnSale"}>On Sale</Link>
                             <a
                                 href="#"
                                 className="block transition-colors hover:text-primary"
@@ -86,37 +77,32 @@ export default function AnimatedWaveFooter() {
                     <div>
                         <h3 className="mb-4 text-lg font-semibold">Contact Us</h3>
                         <address className="space-y-2 text-sm not-italic">
-                            <p>123 Innovation Street</p>
-                            <p>Tech City, TC 12345</p>
-                            <p>Phone: (123) 456-7890</p>
-                            <p>Email: hello@example.com</p>
+
+                            <p>Instagram: apni_vibes_official</p>
+                            <a href="mailto:apnivibesonly@gmail.com">Email: apnivibesonly@gmail.com</a>
                         </address>
                     </div>
                     <div>
                         <h3 className="mb-4 text-lg font-semibold">Follow Us</h3>
                         <div className="flex space-x-4">
-                            <Button variant="ghost" size="icon" className="rounded-full">
-                                <Facebook className="h-4 w-4" />
-                                <span className="sr-only">Facebook</span>
-                            </Button>
-                            <Button variant="ghost" size="icon" className="rounded-full">
-                                <Twitter className="h-4 w-4" />
-                                <span className="sr-only">Twitter</span>
-                            </Button>
-                            <Button variant="ghost" size="icon" className="rounded-full">
-                                <Instagram className="h-4 w-4" />
-                                <span className="sr-only">Instagram</span>
-                            </Button>
-                            <Button variant="ghost" size="icon" className="rounded-full">
-                                <Linkedin className="h-4 w-4" />
-                                <span className="sr-only">LinkedIn</span>
-                            </Button>
+                            <a href="">
+                                <Button variant="ghost" size="icon" className="rounded-full">
+                                    <Facebook className="h-4 w-4" />
+                                    <span className="sr-only">Facebook</span>
+                                </Button>
+                            </a>
+                            <a href="https://www.instagram.com/apni_vibes_official/" target="_blank">
+                                <Button variant="ghost" size="icon" className="rounded-full">
+                                    <Instagram className="h-4 w-4" />
+                                    <span className="sr-only">Instagram</span>
+                                </Button>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div className="mt-12 border-t pt-8 text-center">
                     <p className="text-sm text-muted-foreground">
-                        © 2024 Your Company. All rights reserved.
+                        © {new Date().getFullYear()} ApniVibe. All rights reserved.
                     </p>
                 </div>
             </div>
