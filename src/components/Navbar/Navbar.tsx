@@ -111,7 +111,7 @@ const Navbar = () => {
               onMouseEnter={() => setIsShopDropdownOpen(true)}
               onMouseLeave={() => setIsShopDropdownOpen(false)}
             >
-              <Link href="/ProductsPage">Shop</Link>
+              <Link href="/ProductsPage" className="text-[14px]">All Products</Link>
               <Image
                 src="/dropDown.svg"
                 alt="Drop Down Icon"
