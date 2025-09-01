@@ -6,6 +6,7 @@ import Image from "next/image";
 import HeroFeatureText from "../HeroFeatureText/HeroFeatureText";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import BlurText from "../BlurText";
 
 const Hero = () => {
   return (
@@ -13,17 +14,29 @@ const Hero = () => {
       <div
         className={`${Styles.leftPart} w-1/2 flex flex-col relative  gap-10`}
       >
-        <h1
-          className={`xl:text-[64px] text-left uppercase lg:w-full lg:text-[48px] lg:leading-[50px]  text-[40px]  leading-[42px] font-extrabold xl:leading-[64px]`}
-        >
-          Find your choice that suits your vibes
+        <h1>
+          <BlurText
+            text="Find your choice that suits your vibes"
+            delay={150}
+            animateBy="words"
+            direction="top"
+            className="xl:text-[64px] text-left uppercase lg:w-full lg:text-[48px] lg:leading-[50px]  text-[40px]  leading-[42px] font-extrabold xl:leading-[64px]"
+          />
+
         </h1>
+
         <p
           className={`${Styles.paragraphs}  text-[16px] font-medium text-[#000000]/60`}
         >
-          Browse through our diverse range of meticulously crafted garments,
+
+          <BlurText
+            text="Browse through our diverse range of meticulously crafted garments,
           designed to bring out your individuality and cater to your sense of
-          style.
+          style."
+            delay={150}
+            animateBy="words"
+            direction="top"
+          />
         </p>
         <div className="button lg:w-[210px] w-full md:w-max mx-auto md:m-0 ">
           <Link href={"/ProductsPage"}>

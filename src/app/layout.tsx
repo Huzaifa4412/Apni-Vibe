@@ -7,17 +7,18 @@ import CartProvider from "./CartProvider";
 import { Flip, ToastContainer } from "react-toastify";
 import DataProvider from "./context/ProductContext";
 import CustomCursor from "@/components/CustomCursor/Cursor";
+import Footer2 from "@/components/Footer/Footer2";
 
 export const metadata: Metadata = {
-    title: "Shop.co",
+    title: "Apni Vibe Store",
     description:
-        "Created by Huzaifa Mukhtar Roll number 499351 github: Huzaifa4412",
+        "Find your choice that suits your vibes. Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.",
     keywords: ["e-commerce", "shop", "nextjs", "typescript"],
 };
 
 const urbanist = Urbanist({
     subsets: ["latin"],
-    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    weight: ["400", "500", "700", "800"],
 });
 
 export default function RootLayout({
@@ -50,7 +51,7 @@ export default function RootLayout({
                     <CartProvider>
                         <Navbar />
                         {children}
-                        <Footer />
+                        <Footer2 />
                     </CartProvider>
                 </DataProvider>
             </body>

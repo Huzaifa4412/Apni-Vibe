@@ -135,12 +135,13 @@ const Navbar = () => {
               )}
             </li>
             <li onClick={() => setMenuOpen(false)}>
+              <Link href={"/NewArrivals"}>New Arrival</Link>
+            </li>
+            <li onClick={() => setMenuOpen(false)}>
               {/* <TransitionLink href={"/"} label="On Sale" /> */}
               <Link href={"/OnSale"}>On Sale</Link>
             </li>
-            <li onClick={() => setMenuOpen(false)}>
-              <Link href={"/NewArrivals"}>New Arrival</Link>
-            </li>
+
 
             <Image
               src={"/cross.svg"}
@@ -157,7 +158,7 @@ const Navbar = () => {
 
         {/* For Large Screen Devices */}
         <div
-          className={`${Styles.searchBar} hidden relative order-3 px-[16px] py-[12px] rounded-[62px] xl:w-[577px] h-[full] md:flex items-center gap-[6px]`}
+          className={`${Styles.searchBar} hidden relative order-3 px-[16px] py-[12px] rounded-[62px] xl:w-[550px] h-[full] md:flex items-center gap-[6px]`}
           style={{ backgroundColor: "var(--light-gray)" }}
         >
           <Image

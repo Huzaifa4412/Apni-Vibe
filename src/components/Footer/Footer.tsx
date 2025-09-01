@@ -16,11 +16,12 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-[1.5fr,1fr,1fr,1fr,1fr] gap-8">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1">
-            <h2 className={`${Styles.heading} text-xl font-medium mb-4`}>
-              SHOP.CO
-            </h2>
+            <Link href={"/"} className="order-1 sm:order-2">
+              {/* <div className={`${Styles.logo} text-[32px] font-ld `}>SHOP.CO</div> */}
+              <Image src={"/logo-main.svg"} alt="Logo" className="w-auto h-[70px] object-cover rounded-full" width={100} height={100} />
+            </Link>
             <p className="text-sm text-[#000000]/60 mb-8 leading-relaxed">
-              We have clothes that suits your style and which you&apos;re proud
+              We have products that suits your style and which you&apos;re proud
               to wear. From women to men.
             </p>
             <div className="flex items-center gap-6">
