@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function AnimatedWaveFooter() {
     return (
-        <footer className="relative bg-gradient-to-b from-background to-primary/10 pt-20">
+        <footer className="relative px-10 bg-gradient-to-b from-background to-primary/10 pt-20">
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute bottom-0 h-[500px] w-[1800px] animate-wave">
                     <svg
@@ -58,14 +58,14 @@ export default function AnimatedWaveFooter() {
                             >
                                 Home
                             </a>
-                            <Link href={"/ProductsPage"}>All Products</Link>
+                            <Link className="block transition-colors hover:text-primary" href={"/ProductsPage"}>All Products</Link>
 
 
-                            <Link href={"/NewArrivals"}>New Arrival</Link>
+                            <Link className="block transition-colors hover:text-primary" href={"/NewArrivals"}>New Arrival</Link>
 
 
                             {/* <TransitionLink href={"/"} label="On Sale" /> */}
-                            <Link href={"/OnSale"}>On Sale</Link>
+                            <Link className="block transition-colors hover:text-primary" href={"/OnSale"}>On Sale</Link>
                             <a
                                 href="#"
                                 className="block transition-colors hover:text-primary"
