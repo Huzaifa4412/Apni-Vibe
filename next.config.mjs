@@ -4,12 +4,17 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: [
-      "media.istockphoto.com",
-      "images.unsplash.com",
-      "cdn.pixabay.com",
-      "cdn.sanity.io",
-    ], // Add your image domain here
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        port: "",
+        pathname: "/images/**",
+      }
+    ]
+  },
+  images: {
+    unoptimized: true,
   },
 };
 
