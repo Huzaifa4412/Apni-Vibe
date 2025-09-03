@@ -1,6 +1,5 @@
 // import { client } from "./client"
 
-export const revalidate = 10;
 
 // export async function getProducts() {
 //     try {

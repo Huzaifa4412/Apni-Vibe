@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
-import { Footer } from "@/components/Footer/Footer";
+// import { Footer } from "@/components/Footer/Footer";
 import { Urbanist } from "next/font/google";
 import CartProvider from "./CartProvider";
 import { Flip, ToastContainer } from "react-toastify";

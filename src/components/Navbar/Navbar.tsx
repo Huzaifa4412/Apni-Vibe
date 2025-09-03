@@ -14,17 +14,22 @@ const Navbar = () => {
   const router = useRouter();
   const { data } = useContext(DataContext) as ContextType;
   const { cart } = useSelector((state: RootState) => state.cartReducer);
+  const [products,] = useState<Product[]>(data);
   const [isMenuOpen, setMenuOpen] = React.useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchData, setSearchData] = useState<Product[]>([]);
   const [selectedItem, setSelectedItem] = useState<number>(-1);
   const [searchBar, setSearchBar] = useState(false);
   const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false); // Added state for Shop dropdown
+  const [categories, setCategories] = useState<string[]>([]);
 
-  const categories = Array.from(
-    new Set(data.map((product) => product.category))
-  );
-
+  useEffect(() => {
+    const uniqueCategories = Array.from(
+      new Set(products.map((product) => product.category))
+    );
+    setCategories(uniqueCategories);
+    console.log("Categories >>>", uniqueCategories);
+  }, [products]);
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -39,14 +44,14 @@ const Navbar = () => {
 
   useEffect(() => {
     if (searchQuery !== "") {
-      const filteredData = data.filter(
+      const filteredData = products.filter(
         (product) =>
           product.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
           product.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setSearchData(filteredData);
     }
-  }, [searchQuery]);
+  }, [searchQuery, products]);
   const HandlerKeys = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (selectedItem < searchData.length) {
       if (e.key === "ArrowDown" && selectedItem < searchData.length - 1) {
@@ -111,7 +116,7 @@ const Navbar = () => {
               onMouseEnter={() => setIsShopDropdownOpen(true)}
               onMouseLeave={() => setIsShopDropdownOpen(false)}
             >
-              <Link href="/ProductsPage" className="text-[14px]">All Products</Link>
+              <Link href="/ProductsPage" >All Products</Link>
               <Image
                 src="/dropDown.svg"
                 alt="Drop Down Icon"

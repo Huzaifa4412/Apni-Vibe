@@ -21,13 +21,13 @@ const Page = () => {
   const [products, setProducts] = useState<Product[]>(data);
   const [filterConfig, setFilterConfig] = useState<Filter>({
     lowPrice: 0,
-    highPrice: Math.max(...data.map((item) => Number(item.price))),
+    highPrice: Math.max(...products.map((item) => Number(item.price))),
   });
 
-  const high_price = Math.max(...data.map((item) => Number(item.price)));
+  const high_price = Math.max(...products.map((item) => Number(item.price)));
 
   const applyFilters = () => {
-    const filteredData = data.filter((item) => {
+    const filteredData = products.filter((item) => {
       const categoryMatch =
         !filterConfig.category || item.category === filterConfig.category;
       const priceMatch =
@@ -42,7 +42,7 @@ const Page = () => {
   useEffect(() => {
     applyFilters();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, filterConfig]);
+  }, [products, filterConfig]);
 
   const updateFilter = (key: keyof Filter, value: string | number) => {
     if (!(key == "highPrice" || key == "lowPrice")) {
@@ -52,7 +52,7 @@ const Page = () => {
     setFilterConfig((prev) => ({ ...prev, [key]: value }));
   };
 
-  const categories = Array.from(new Set(data.map((item) => item.category)));
+  const categories = Array.from(new Set(products.map((item) => item.category)));
 
   const [showPrice, setShowPrice] = useState(false);
   const [showSideBar, setShowSideBar] = useState(false);
@@ -143,7 +143,7 @@ const Page = () => {
               <div
                 onClick={() => {
                   setFilterConfig({ lowPrice: 0, highPrice: 100000 });
-                  setProducts(data);
+                  setProducts(products);
                   toast.warning("All Filters has been Cleared ");
                 }}
               >
