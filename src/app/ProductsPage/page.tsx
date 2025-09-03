@@ -18,16 +18,19 @@ interface Filter {
 
 const Page = () => {
   const { data } = useContext(DataContext) as ContextType;
-  const [products, setProducts] = useState<Product[]>(data);
+
+  // keep original data intact
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>(data);
+
+  const maxPrice = Math.max(...data.map((item) => Number(item.price)));
   const [filterConfig, setFilterConfig] = useState<Filter>({
     lowPrice: 0,
-    highPrice: Math.max(...products.map((item) => Number(item.price))),
+    highPrice: maxPrice,
   });
 
-  const high_price = Math.max(...products.map((item) => Number(item.price)));
-
-  const applyFilters = () => {
-    const filteredData = products.filter((item) => {
+  // run filters when filterConfig changes
+  useEffect(() => {
+    const filteredData = data.filter((item) => {
       const categoryMatch =
         !filterConfig.category || item.category === filterConfig.category;
       const priceMatch =
@@ -36,29 +39,24 @@ const Page = () => {
 
       return categoryMatch && priceMatch;
     });
-    setProducts(filteredData);
-  };
-
-  useEffect(() => {
-    applyFilters();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [products, filterConfig]);
+    setFilteredProducts(filteredData);
+  }, [filterConfig, data]);
 
   const updateFilter = (key: keyof Filter, value: string | number) => {
-    if (!(key == "highPrice" || key == "lowPrice")) {
-      setFilterConfig((prev) => ({ ...prev, [key]: value }));
-      return toast.info("Filter Applied");
-    }
     setFilterConfig((prev) => ({ ...prev, [key]: value }));
+    if (key !== "lowPrice" && key !== "highPrice") {
+      toast.info("Filter Applied");
+    }
   };
 
-  const categories = Array.from(new Set(products.map((item) => item.category)));
+  const categories = Array.from(new Set(data.map((item) => item.category)));
 
   const [showPrice, setShowPrice] = useState(false);
   const [showSideBar, setShowSideBar] = useState(false);
 
   return (
     <div className="container !px-0">
+      {/* Breadcrumbs */}
       <div className="BreadCrams text-[16px] px-5 flex gap-2 items-center">
         <Link href={"/"} className="flex items-center">
           <h3>Home</h3>
@@ -66,7 +64,9 @@ const Page = () => {
         </Link>
         <h3>All Outfits</h3>
       </div>
+
       <div className="content flex flex-col lg:flex-row gap-8 items-center lg:items-start h-max mt-8">
+        {/* Sidebar */}
         <div className="sideBar w-[295px] h-max px-[24px] py-[20px] flex flex-col gap-[24px] border rounded-[20px]">
           <header className="flex w-max items-center gap-6 relative">
             <Heading text="Filter" size={20} />
@@ -81,9 +81,11 @@ const Page = () => {
               />
             </div>
           </header>
+
           {showSideBar && (
-            <div className="flex flex-col transition-all duration-500 ease-in-out delay-1 gap-[16px]">
+            <div className="flex flex-col gap-[16px]">
               <hr />
+              {/* Category Filter */}
               <div className="f_category">
                 <div className="categories flex flex-col gap-5">
                   {categories.map((category) => (
@@ -105,6 +107,7 @@ const Page = () => {
                 </div>
               </div>
               <hr />
+              {/* Price Filter */}
               <div className="f_price">
                 <header
                   className="flex justify-between cursor-pointer"
@@ -116,14 +119,16 @@ const Page = () => {
                     alt="Arrow"
                     width={16}
                     height={16}
-                    className={`transform transition-transform duration-300 ${showPrice ? "rotate-180" : ""}`}
+                    className={`transform transition-transform duration-300 ${showPrice ? "rotate-180" : ""
+                      }`}
                   />
                 </header>
                 <div
-                  className={`transition-all duration-300 ${showPrice ? "max-h-screen" : "max-h-0 overflow-hidden"}`}
+                  className={`transition-all duration-300 ${showPrice ? "max-h-screen" : "max-h-0 overflow-hidden"
+                    }`}
                 >
                   <RangeSlider
-                    highPrice={high_price}
+                    highPrice={maxPrice}
                     filterByPrice={(low, high) => {
                       updateFilter("lowPrice", low);
                       updateFilter("highPrice", high);
@@ -131,20 +136,12 @@ const Page = () => {
                   />
                 </div>
               </div>
-              <div
-                className="mt-5"
-                onClick={() => {
-                  applyFilters();
-                  toast.success("All Filters has been Applied ");
-                }}
-              >
-                <Button text="Apply Filter" dark_variant={true} />
-              </div>
+
+              {/* Clear Filter */}
               <div
                 onClick={() => {
-                  setFilterConfig({ lowPrice: 0, highPrice: 100000 });
-                  setProducts(products);
-                  toast.warning("All Filters has been Cleared ");
+                  setFilterConfig({ lowPrice: 0, highPrice: maxPrice });
+                  toast.warning("All Filters Cleared");
                 }}
               >
                 <Button text="Clear Filter" dark_variant={true} />
@@ -152,10 +149,12 @@ const Page = () => {
             </div>
           )}
         </div>
+
+        {/* Product List */}
         <div className="products_container flex-1">
-          {products.length > 0 ? (
+          {filteredProducts.length > 0 ? (
             <div className="flex justify-center flex-wrap gap-5">
-              {products.map((item: Product) => (
+              {filteredProducts.map((item: Product) => (
                 <ProductCard key={item._id} item={item} />
               ))}
             </div>
