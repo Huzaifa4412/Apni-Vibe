@@ -21,15 +21,7 @@ const Navbar = () => {
   const [selectedItem, setSelectedItem] = useState<number>(-1);
   const [searchBar, setSearchBar] = useState(false);
   const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false); // Added state for Shop dropdown
-  const [categories, setCategories] = useState<string[]>([]);
-
-  useEffect(() => {
-    const uniqueCategories = Array.from(
-      new Set(products.map((product) => product.category))
-    );
-    setCategories(uniqueCategories);
-    console.log("Categories >>>", uniqueCategories);
-  }, [products]);
+  const categories = [...new Set(products.map(p => p.category))];
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
