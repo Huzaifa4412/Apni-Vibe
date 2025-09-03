@@ -22,6 +22,7 @@ export default defineType({
             name: 'description',
             title: 'Description',
             type: 'text',
+            validation: Rule => Rule.required().error('This field is required'),
         },
         {
             name: 'image',
@@ -39,7 +40,8 @@ export default defineType({
             name: "category",
             title: "Category",
             type: 'reference',
-            to: [{ type: 'categories' }]
+            to: [{ type: 'categories' }],
+            validation: Rule => Rule.required().error('This field is required'),
         },
 
         {
