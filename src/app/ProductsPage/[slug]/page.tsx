@@ -150,8 +150,6 @@ const Page = ({ params }: { params: { slug: string } }) => {
         <Image src={"/arrow.svg"} alt="Arrow" width={16} height={16} />
         <h3>Shop</h3>
         <Image src={"/arrow.svg"} alt="Arrow" width={16} height={16} />
-        <h3>Men</h3>
-        <Image src={"/arrow.svg"} alt="Arrow" width={16} height={16} />
         <h3 className="font-semibold">{category}</h3>
       </div>
 

@@ -86,6 +86,18 @@ export default defineType({
             type: 'number',
             title: "Quantity",
             validation: Rule => Rule.min(0),
+        },
+        {
+            name: "order_actual_price",
+            type: 'number',
+            title: "Order Actual Price",
+            description: "Actual price at the time of order ( jo hamiene milega )",
+        },
+        {
+            name: "shipped_by",
+            type: 'string',
+            title: "Shipped By",
+            description: "Shipping service used ( kahan say ship krna hy )",
         }
     ],
 });
