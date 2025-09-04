@@ -15,7 +15,7 @@ export default function AnimatedWaveFooter() {
                     <svg
                         className="h-full w-full"
                         viewBox="0 0 1800 500"
-                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns="http://www.w3.org/2000/svg" f
                     >
                         <path
                             d="M0 250C200 150 400 50 600 100C800 150 1000 350 1200 300C1400 250 1600 150 1800 250V500H0V250Z"
@@ -85,7 +85,7 @@ export default function AnimatedWaveFooter() {
                     <div>
                         <h3 className="mb-4 text-lg font-semibold">Follow Us</h3>
                         <div className="flex space-x-4">
-                            <a href="">
+                            <a href="https://www.facebook.com/share/1b6ANYm7Um/" target="_blank">
                                 <Button variant="ghost" size="icon" className="rounded-full">
                                     <Facebook className="h-4 w-4" />
                                     <span className="sr-only">Facebook</span>
