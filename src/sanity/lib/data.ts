@@ -1,16 +1,16 @@
-// import { client } from "./client"
+import { client } from "./client"
 
 
-// export async function getProducts() {
-//     try {
-//         const query = `*[_type == "product"]{name,"image":image.asset -> url,rating, price, discountPercent,_id, discountedPrice }`
-//         const products = await client.fetch(query)
-//         return products
-//     } catch (error) {
-//         console.log("Error >>>", error)
-//         return null
-//     }
-// }
+export async function getProducts() {
+    try {
+        const query = `*[_type == "product"]{name,"image":image.asset -> url,rating, price, discountPercent,_id, discountedPrice }`
+        const products = await client.fetch(query)
+        return products
+    } catch (error) {
+        console.log("Error >>>", error)
+        return null
+    }
+}
 
 // export async function getAllProducts() {
 //     try {

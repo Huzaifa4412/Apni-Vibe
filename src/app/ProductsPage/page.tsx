@@ -153,7 +153,7 @@ const Page = () => {
         {/* Product List */}
         <div className="products_container flex-1">
           {filteredProducts.length > 0 ? (
-            <div className="flex justify-center flex-wrap gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
               {filteredProducts.map((item: Product) => (
                 <ProductCard key={item._id} item={item} />
               ))}

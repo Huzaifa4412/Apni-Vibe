@@ -69,11 +69,11 @@ const Hero = () => {
           }}
         />
         <Image
-          src={"/HeroSection/model1.png"}
+          src={"/HeroSection/hero.png"}
           alt="Model Image"
-          width={1000}
           height={15000}
-          className="object-cover h-[100%] bottom-0 w-full"
+          width={1000}
+          className="object-cover h-[100%] bottom-0 w-full min-h-[350px]"
         />
       </div>
     </div>

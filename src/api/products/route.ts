@@ -7,22 +7,26 @@ import { NextResponse } from "next/server";
 export const revalidate = 60;
 
 export async function GET() {
-    const query = `*[_type == "product"] | order(_createdAt desc){
+  const query = `*[_type == "product"] | order(_createdAt desc){
     _id,
-    name,
-    price,
-    discountPercent,
-    sale,
-    description,
-    "image": image.asset->url + "?w=400&h=400&auto=format",
-    "other_images": other_images[].asset->url + "?w=400&h=400&auto=format",
-    "category": category->title,
-    isNew,
-    top_selling,
-    rating,
-    quantity
-  }`;
+  _type,
+  name,
+  price,
+  description,
+  "image": image.asset->url,
+  "other_images": other_images[].asset->url,
+  "category":category->title,
+  isNew,
+  sale,
+  discountPercent,
+  "discountedPrice": select(
+    sale == true && defined(discountPercent) => price - ((price * discountPercent) / 100),
+    price
+  ),
+  rating,
+  quantity
+}`;
 
-    const products = await client.fetch(query);
-    return NextResponse.json(products);
+  const products = await client.fetch(query);
+  return NextResponse.json(products);
 }
