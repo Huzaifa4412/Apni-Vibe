@@ -16,28 +16,32 @@ import { Pagination, Navigation } from "swiper/modules";
 
 const testimonials = [
   {
-    name: "Sarah M.",
-    desc: `"I'm blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I've bought has exceeded my expectations.”`,
+    name: "Ayesha Khan",
+    desc: `"ApniVibe ki jewellery collection bohat classy hai. Har piece lightweight aur elegant lagta hai. Mujhe specially unka bracelet bohat pasand aya. Online photos aur real product bilkul same nikla.”`,
     blur: false,
   },
   {
-    name: "Alex K.",
-    desc: `"Finding clothes that align with my personal style used to be a challenge until I discovered Shop.co. The range of options they offer is truly remarkable, catering to a variety of tastes and occasions.”`,
+    name: "Hamza Raizi",
+    desc: `"Main ne ApniVibe se smart watch order ki thi aur honestly, value for money hai. Design stylish, battery timing zabardast aur delivery bhi time pe thi. Recommend karunga sabko.”`,
     blur: false,
   },
   {
-    name: "James L.",
-    desc: `"James L.
-    "As someone who's always on the lookout for unique fashion pieces, I'm thrilled to have stumbled upon Shop.co. The selection of clothes is not only diverse but also on-point with the latest trends.””`,
+    name: "Sana F.",
+    desc: `"Perfume collection ApniVibe ka bohat hi unique hai. Fragrances long-lasting hain aur packaging bhi bohat premium thi. Price bhi reasonable tha as compared to malls.”`,
     blur: false,
   },
   {
-    name: "James L.",
-    desc: `"James L.
-    "As someone who's always on the lookout for unique fashion pieces, I'm thrilled to have stumbled upon Shop.co. The selection of clothes is not only diverse but also on-point with the latest trends.””`,
+    name: "Bilal Hashmi",
+    desc: `"Mujhe bags ka collection bohat acha laga ApniVibe pe. Trendy aur durable dono cheezain ek saath milti hain. Mere dost bhi puch rahe the bag kahan se liya hai 😅.”`,
     blur: true,
   },
+  {
+    name: "Zara Malik",
+    desc: `"ApniVibe se pehli dafa order kiya tha airbuds aur honestly expectations cross kar gayi. Sound quality clear hai, bass strong hai aur case bhi sleek design ka hai.”`,
+    blur: false,
+  },
 ];
+
 
 export default function Testimonials() {
   return (
