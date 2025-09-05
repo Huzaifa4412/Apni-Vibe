@@ -10,7 +10,7 @@ import { Product } from "../../../Typing";
 
 const getProduct = async () => {
   try {
-    const query = `*[_type == "product" && top_selling]  | order(_createdAt desc) {name,"image":image.asset -> url,rating, price, discountPercent,_id, discountedPrice }[0..7]`;
+    const query = `*[_type == "product" && top_selling]  | order(_createdAt desc) {name,"image":image.asset -> url,rating, price, discountPercent,_id, "discountedPrice": select(sale == true && defined(discountPercent) => price - ((price * discountPercent) / 100), price) }[0..7]`;
 
     const product = client.fetch(query);
     return product;
