@@ -10,7 +10,7 @@ import { Product } from "../../../Typing";
 
 const getProduct = async () => {
   try {
-    const Query = `*[_type == "product" && isNew == true]{name,"image":image.asset -> url,rating, price, discountPercent,_id, "discountedPrice": select(
+    const Query = `*[_type == "product" && isNew == true] | order(_createdAt desc){name,"image":image.asset -> url,rating, price, discountPercent,_id, "discountedPrice": select(
       sale == true && defined(discountPercent) => price - ((price * discountPercent) / 100),
       price
     ), }[0..7]`;
