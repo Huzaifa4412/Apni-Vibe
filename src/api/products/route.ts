@@ -19,7 +19,7 @@ export async function GET() {
   isNew,
   sale,
   discountPercent,
-  "discountedPrice": select(
+  "discountedPrice  ": select(
     sale == true && defined(discountPercent) => price - ((price * discountPercent) / 100),
     price
   ),

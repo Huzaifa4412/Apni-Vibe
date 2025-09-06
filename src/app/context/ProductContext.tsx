@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useEffect, useState } from "react";
 import { Product } from "../../../Typing";
+import { client } from "@/sanity/lib/client";
 // import { getAllProducts } from "@/sanity/lib/data";
 
 export const revalidate = 10;
@@ -17,8 +18,28 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        fetch("/api/products")
-            .then((res) => res.json())
+        client
+            .fetch(
+                `*[_type == "product"] | order(_createdAt desc){
+    _id,
+  _type,
+  name,
+  price,
+  description,
+  "image": image.asset->url,
+  "other_images": other_images[].asset->url,
+  "category":category->title,
+  isNew,
+  sale,
+  discountPercent,
+  "discountedPrice": select(
+    sale == true && defined(discountPercent) => price - ((price * discountPercent) / 100),
+    price
+  ),
+  rating,
+  quantity
+}`
+            )
             .then((res) => setData(res))
             .finally(() => setLoading(false));
     }, []);
